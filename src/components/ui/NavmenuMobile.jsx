@@ -12,7 +12,7 @@ export default function NavmenuMobile({ open, setOpen, navItems, pathname }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="md:hidden min-h-screen flex flex-col items-center justify-center gap-2 bg-bg absolute left-0 right-0 top-full pt-10 pb-20"
+                    className="md:hidden min-h-screen flex flex-col items-center justify-center gap-2 bg-bg absolute left-0 right-0 top-22 pt-10 pb-20 rounded-xl shadow-xl"
                 >
                     {navItems.map((item) => (
                         <li key={item.id} className="list-none text-text">
