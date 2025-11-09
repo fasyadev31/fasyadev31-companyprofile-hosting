@@ -5,18 +5,14 @@ import TechStack from "@/components/sections/home/TechStack";
 import PortfolioPreview from "@/components/sections/home/PortfolioPreview";
 import AboutSection from "@/components/sections/home/AboutUs";
 import Footer from "@/components/layouts/Footer";
-import ServicesSection from "@/components/sections/home/ServicesSection";
+import ServicesPage from "@/components/sections/services/SevicesPage";
 
 export default function Home() {
-  return (
-    <div>
-      <Navbar />
-      <Hero />
-      <AboutSection />
-      <TechStack />
-      <PortfolioPreview />
-      <ServicesSection />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Navbar />
+            <ServicesPage />
+            <Footer />
+        </div>
+    );
 }

@@ -1,4 +1,5 @@
 // app/portofolio/page.js
+import Footer from "@/components/layouts/Footer";
 import Navbar from "@/components/layouts/Navbar";
 import ContactPage from "@/components/sections/contact/ContactPage";
 
@@ -7,6 +8,7 @@ export default function Contact() {
     <>
       <Navbar />
       <ContactPage />
+      <Footer />
     </>
   );
 }

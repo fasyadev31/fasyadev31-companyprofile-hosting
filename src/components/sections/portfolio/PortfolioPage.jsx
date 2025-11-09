@@ -110,7 +110,7 @@ export default function PortfolioPage() {
     return (
         <div className="min-h-screen bg-bg">
             {/* Hero Section */}
-            <section className="relative min-h-[60vh] flex items-center justify-center px-6 md:px-16 lg:px-20 py-32 overflow-hidden bg-gradient-to-br from-bg via-primary/5 to-accent/5">
+            <section className="relative min-h-[60vh] flex items-center justify-center px-6 md:px-16 lg:px-20 py-32 overflow-hidden bg-linear-to-br from-bg via-primary/5 to-accent/5">
                 {/* Animated Background */}
                 <div className="absolute inset-0 overflow-hidden">
                     <div 
@@ -131,7 +131,7 @@ export default function PortfolioPage() {
                     </div>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text">
                         Portfolio
-                        <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mt-2">
+                        <span className="block bg-linear-to-r from-primary via-accent to-primary bg-clip-text text-transparent mt-2">
                             Project Terbaik Kami
                         </span>
                     </h1>
@@ -142,19 +142,19 @@ export default function PortfolioPage() {
                     {/* Stats */}
                     <div className="flex justify-center gap-8 md:gap-12 pt-8">
                         <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            <div className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
                                 50+
                             </div>
                             <div className="text-sm text-text/60 mt-1">Projects Done</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            <div className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
                                 30+
                             </div>
                             <div className="text-sm text-text/60 mt-1">Happy Clients</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            <div className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
                                 100%
                             </div>
                             <div className="text-sm text-text/60 mt-1">Satisfaction</div>
@@ -180,7 +180,7 @@ export default function PortfolioPage() {
                                 onClick={() => setFilter(cat.id)}
                                 className={`group px-5 md:px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
                                     filter === cat.id
-                                        ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/20 scale-105"
+                                        ? "bg-linear-to-r from-primary to-accent text-white shadow-lg shadow-primary/20 scale-105"
                                         : "bg-bg border-2 border-text/10 text-text hover:border-primary hover:scale-105"
                                 }`}
                             >
@@ -194,7 +194,7 @@ export default function PortfolioPage() {
 
             {/* Featured Projects - Showcase Style */}
             {featuredProjects.length > 0 && (
-                <section className="py-16 md:py-24 px-6 md:px-16 lg:px-20 bg-gradient-to-b from-bg to-primary/5">
+                <section className="py-16 md:py-24 px-6 md:px-16 lg:px-20 bg-linear-to-b from-bg to-primary/5">
                     <div className="container mx-auto max-w-7xl">
                         <div className="text-center mb-12">
                             <h2 className="text-3xl md:text-4xl font-bold text-text mb-3">
@@ -215,9 +215,9 @@ export default function PortfolioPage() {
                                 >
                                     {/* Image Side */}
                                     <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                                        <div className="relative aspect-[16/10] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 to-accent/10">
+                                        <div className="relative aspect-16/10 rounded-3xl overflow-hidden bg-linear-to-br from-primary/10 to-accent/10">
                                             {/* Placeholder - ganti dengan Image component pas ada gambarnya */}
-                                            <div className={`absolute inset-0 bg-gradient-to-br ${project.color} flex items-center justify-center text-white`}>
+                                            <div className={`absolute inset-0 bg-linear-to-br ${project.color} flex items-center justify-center text-white`}>
                                                 <div className="text-center space-y-4">
                                                     <div className="text-6xl">🎨</div>
                                                     <div className="text-2xl font-bold">{project.title}</div>
@@ -225,7 +225,7 @@ export default function PortfolioPage() {
                                             </div>
                                             
                                             {/* Overlay */}
-                                            <div className={`absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-500 ${
+                                            <div className={`absolute inset-0 bg-linear-to-t from-black/60 to-transparent transition-opacity duration-500 ${
                                                 hoveredProject === project.id ? 'opacity-80' : 'opacity-50'
                                             }`} />
 
@@ -245,7 +245,7 @@ export default function PortfolioPage() {
                                         </div>
 
                                         {/* Glow Effect */}
-                                        <div className={`absolute -inset-1 bg-gradient-to-br ${project.color} rounded-3xl blur-2xl transition-opacity duration-500 -z-10 ${
+                                        <div className={`absolute -inset-1 bg-linear-to-br ${project.color} rounded-3xl blur-2xl transition-opacity duration-500 -z-10 ${
                                             hoveredProject === project.id ? 'opacity-40' : 'opacity-0'
                                         }`} />
                                     </div>
@@ -254,7 +254,7 @@ export default function PortfolioPage() {
                                     <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
                                         <div>
                                             <div className="flex items-center gap-3 mb-3">
-                                                <span className={`px-3 py-1 bg-gradient-to-r ${project.color} text-white rounded-lg text-xs font-bold`}>
+                                                <span className={`px-3 py-1 bg-linear-to-r ${project.color} text-white rounded-lg text-xs font-bold`}>
                                                     FEATURED
                                                 </span>
                                                 <span className="text-text/40 text-sm">{project.year}</span>
@@ -317,8 +317,8 @@ export default function PortfolioPage() {
                                     onMouseLeave={() => setHoveredProject(null)}
                                 >
                                     {/* Project Image */}
-                                    <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-primary/10 to-accent/10">
-                                        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} flex items-center justify-center text-white text-6xl`}>
+                                    <div className="relative aspect-4/3 overflow-hidden bg-linear-to-br from-primary/10 to-accent/10">
+                                        <div className={`absolute inset-0 bg-linear-to-br ${project.color} flex items-center justify-center text-white text-6xl`}>
                                             🎨
                                         </div>
                                         
@@ -369,7 +369,7 @@ export default function PortfolioPage() {
 
                                     {/* Shine Effect */}
                                     <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-                                        <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ${
+                                        <div className={`absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ${
                                             hoveredProject === project.id ? 'translate-x-full' : '-translate-x-full'
                                         }`} />
                                     </div>
@@ -390,12 +390,12 @@ export default function PortfolioPage() {
             )}
 
             {/* CTA Section */}
-            <section className="py-20 md:py-32 px-6 md:px-16 lg:px-20 bg-gradient-to-br from-primary/10 via-accent/10 to-bg">
+            <section className="py-20 md:py-32 px-6 md:px-16 lg:px-20 bg-linear-to-br from-primary/10 via-accent/10 to-bg">
                 <div className="container mx-auto max-w-4xl text-center space-y-8">
                     <div className="space-y-4">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text">
                             Punya Project yang
-                            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            <span className="block bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
                                 Ingin Diwujudkan?
                             </span>
                         </h2>
@@ -406,7 +406,7 @@ export default function PortfolioPage() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="/contact"
-                            className="px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-2xl font-semibold hover:scale-105 transition-all shadow-lg inline-flex items-center justify-center gap-2"
+                            className="px-8 py-4 bg-linear-to-r from-primary to-accent text-white rounded-2xl font-semibold hover:scale-105 transition-all shadow-lg inline-flex items-center justify-center gap-2"
                         >
                             Hubungi Kami
                             <span>→</span>

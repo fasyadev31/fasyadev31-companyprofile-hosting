@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 import { useState, useEffect } from "react"
 
 export default function Hero() {
@@ -16,7 +17,7 @@ export default function Hero() {
     }, [])
 
     return (
-        <section className="relative flex min-h-screen items-center px-6 md:px-16 lg:px-20 py-32 bg-gradient-to-br from-bg via-bg to-primary/5 overflow-hidden">
+        <section className="relative flex min-h-screen items-center px-6 md:px-16 lg:px-20 py-32 bg-linear-to-br from-bg via-bg to-primary/40 overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div 
@@ -44,7 +45,7 @@ export default function Hero() {
                     
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text leading-tight">
                         Wujudkan Website
-                        <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        <span className="block bg-linear-to-br from-primary to-accent bg-clip-text text-transparent">
                             Impian Anda
                         </span>
                     </h1>
@@ -54,15 +55,15 @@ export default function Hero() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <button className="px-8 py-4 bg-primary text-white rounded-2xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/20">
-                            Lihat Portfolio
-                        </button>
-                        <button className="px-8 py-4 bg-bg border-2 border-primary text-primary rounded-2xl font-semibold hover:bg-primary/5 transition-all">
+                        <Link href="/services" className="cursor-pointer px-8 py-4 bg-primary text-white rounded-2xl font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/20">
+                            Layanan Kami
+                        </Link>
+                        <Link href="/contact" className="cursor-pointer px-8 py-4 bg-bg border-2 border-primary text-primary rounded-2xl font-semibold hover:bg-primary/5 transition-all">
                             Hubungi Kami
-                        </button>
+                        </Link>
                     </div>
 
-                    {/* Stats */}
+                    {/* Stats
                     <div className="grid grid-cols-3 gap-6 pt-8 border-t border-text/10">
                         <div>
                             <div className="text-2xl md:text-3xl font-bold text-primary">50+</div>
@@ -76,7 +77,7 @@ export default function Hero() {
                             <div className="text-2xl md:text-3xl font-bold text-primary">100%</div>
                             <div className="text-sm text-text/60">Satisfied</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Right Column - Illustration */}
@@ -99,7 +100,7 @@ export default function Hero() {
                                 
                                 {/* Content Blocks */}
                                 <div className="space-y-3">
-                                    <div className="h-8 bg-gradient-to-r from-primary/20 to-transparent rounded-lg" />
+                                    <div className="h-8 bg-linear-to-br from-primary/20 to-transparent rounded-lg" />
                                     <div className="h-4 bg-text/5 rounded w-3/4" />
                                     <div className="h-4 bg-text/5 rounded w-1/2" />
                                     <div className="grid grid-cols-2 gap-3 pt-2">
@@ -120,7 +121,7 @@ export default function Hero() {
                     </div>
 
                     {/* Decorative Elements */}
-                    <div className="absolute -z-10 -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-2xl" />
+                    <div className="absolute -z-10 -inset-4 bg-linear-to-br from-primary/20 to-accent/20 rounded-3xl blur-2xl" />
                 </div>
             </div>
 

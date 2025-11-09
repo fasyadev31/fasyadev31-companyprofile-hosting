@@ -190,23 +190,20 @@ Terima kasih! 🙏`
 
                 {/* Quick Contact via WhatsApp Templates */}
                 <div className="mb-16">
-                    <h2 className="text-2xl md:text-3xl font-bold text-text text-center mb-8">
-                        💬 Quick Chat via WhatsApp
-                    </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                         {quickTemplates.map((template, index) => (
                             <button
                                 key={index}
                                 onClick={() => handleQuickTemplate(template.message)}
-                                className="group relative bg-bg border-2 border-text/10 rounded-2xl p-6 hover:border-green-500 transition-all duration-300 hover:scale-105 hover:shadow-xl text-left"
+                                className="group relative bg-bg border-2 border-text/10 rounded-2xl p-6 hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-xl text-left"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
                                 
                                 <div className="relative z-10 space-y-3">
                                     <div className="text-4xl mb-2">{template.icon}</div>
                                     <h3 className="font-bold text-text text-lg">{template.title}</h3>
                                     <p className="text-sm text-text/60">{template.desc}</p>
-                                    <div className="text-green-500 font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                                    <div className="text-primary font-semibold text-sm group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
                                         Chat Sekarang →
                                     </div>
                                 </div>
@@ -220,7 +217,7 @@ Terima kasih! 🙏`
                     {/* Email Form */}
                     <div className="bg-bg border-2 border-text/10 rounded-3xl p-8 md:p-10">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-2xl">
+                            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-2xl">
                                 📧
                             </div>
                             <div>
@@ -289,7 +286,7 @@ Terima kasih! 🙏`
 
                             <div>
                                 <label className="block text-text font-semibold mb-2 text-sm">
-                                    Jenis Project *
+                                    Jenis Paket *
                                 </label>
                                 <select
                                     name="projectType"
@@ -298,10 +295,10 @@ Terima kasih! 🙏`
                                     required
                                     className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors"
                                 >
-                                    <option value="website">Website</option>
-                                    <option value="webapp">Web Application</option>
-                                    <option value="mobile">Mobile App</option>
-                                    <option value="other">Lainnya</option>
+                                    <option value="website">Starter</option>
+                                    <option value="webapp">Professional</option>
+                                    <option value="mobile">Enterpise</option>
+                                    <option value="other">Paket Custom</option>
                                 </select>
                             </div>
 
@@ -338,7 +335,7 @@ Terima kasih! 🙏`
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                className="w-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                             >
                                 {isSubmitting ? "Mengirim..." : "📧 Kirim Email"}
                             </button>
@@ -421,7 +418,7 @@ Terima kasih! 🙏`
                         href="mailto:hello@fasya-dev.com" 
                         className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:scale-105 transition-transform inline-block"
                     >
-                        hello@fasya-dev.com
+                        fasyadev@gmail.com
                     </a>
                 </div>
             </div>

@@ -16,7 +16,7 @@ export default function Navbar() {
 
     const navItems = [
         { id: "", label: "Beranda" },
-        { id: "portfolio", label: "Portfolio" },
+        { id: "services", label: "Layanan Kami" },
         { id: "contact", label: "Hubungi Kami" },
     ]
 

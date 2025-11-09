@@ -11,6 +11,7 @@
   --color-text-secondary: #4E4E4E;
   --color-accent: #B689FF;
   --color-border: #E0D7F3;
+  --color-footer: #8e50da;
 }
 
 /* Dark Theme aktif ketika class .dark ada di <html> */
@@ -23,6 +24,7 @@ html.dark {
   --color-text-secondary: #C7BFE3;
   --color-accent: #D3B0FF;
   --color-border: #3D2A54;
+  --color-footer: #5B2E91;
 }
 
 body {
