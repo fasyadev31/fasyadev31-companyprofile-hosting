@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowRight, Heart, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { Mail, Phone, ArrowRight, Heart, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { FaInstagram, FaLinkedin, FaTiktok, FaYoutube } from 'react-icons/fa';
 
 export default function Footer() {
     const quickLinks = [
@@ -18,11 +19,8 @@ export default function Footer() {
     ];
 
     const socialMedia = [
-        { icon: Facebook, href: "#", label: "Facebook" },
-        { icon: Twitter, href: "#", label: "Twitter" },
-        { icon: Instagram, href: "#", label: "Instagram" },
-        { icon: Linkedin, href: "#", label: "LinkedIn" },
-        { icon: Youtube, href: "#", label: "YouTube" },
+        { icon: FaInstagram, href: "https://instagram.com/fasyadev31", label: "Instagram" },
+        { icon: FaTiktok, href: "https://tiktok.com/@fasyadev31", label: "Tiktok" },
     ];
 
     const [email, setEmail] = useState("");
@@ -167,6 +165,7 @@ export default function Footer() {
                                         <a
                                             key={social.label}
                                             href={social.href}
+                                            target='_blank'
                                             aria-label={social.label}
                                             className="w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm hover:bg-accent flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg"
                                         >
@@ -185,13 +184,11 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {services.map((service) => (
                                 <li key={service.name}>
-                                    <a
-                                        href={service.href}
-                                        className="text-white/80 hover:text-accent transition-colors inline-flex items-center gap-2 group"
+                                    <div
+                                        className="text-white/80 transition-colors inline-flex items-center gap-2 group"
                                     >
-                                        <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                                         {service.name}
-                                    </a>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

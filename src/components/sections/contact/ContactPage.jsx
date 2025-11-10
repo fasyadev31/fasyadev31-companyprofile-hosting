@@ -1,8 +1,8 @@
 "use client"
-import { useState, useRef } from "react"
+import { useState } from "react"
+import { FaInstagram, FaTiktok } from "react-icons/fa"
 
 export default function ContactPage() {
-    const formRef = useRef()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -13,6 +13,7 @@ export default function ContactPage() {
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState(null) // 'success' or 'error'
+    const [errorMessage, setErrorMessage] = useState("")
 
     // Ganti dengan nomor WhatsApp kalian (format: 628xxxxxxxxxx)
     const whatsappNumber = "6281234567890"
@@ -32,7 +33,7 @@ Nama: ${formData.name || '[Nama Anda]'}
 Email: ${formData.email || '[Email Anda]'}
 No. HP: ${formData.phone || '[No. HP Anda]'}
 
-🎯 *Jenis Project:* ${formData.projectType === 'website' ? 'Website' : formData.projectType === 'webapp' ? 'Web Application' : formData.projectType === 'mobile' ? 'Mobile App' : 'Lainnya'}
+🎯 *Jenis Project:* ${formData.projectType === 'website' ? 'Starter' : formData.projectType === 'webapp' ? 'Professional' : formData.projectType === 'mobile' ? 'Enterprise' : 'Paket Custom'}
 
 📝 *Subject:* ${formData.subject || '[Subject Project]'}
 
@@ -45,43 +46,23 @@ Terima kasih! 🙏`
         window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank')
     }
 
-    // Function untuk kirim email via EmailJS
+    // Function untuk kirim ke Supabase
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsSubmitting(true)
         setSubmitStatus(null)
+        setErrorMessage("")
 
         try {
-            // EmailJS Configuration
-            const serviceID = 'YOUR_SERVICE_ID' // Ganti dengan Service ID dari EmailJS
-            const templateID = 'YOUR_TEMPLATE_ID' // Ganti dengan Template ID dari EmailJS
-            const publicKey = 'YOUR_PUBLIC_KEY' // Ganti dengan Public Key dari EmailJS
-
-            const templateParams = {
-                from_name: formData.name,
-                from_email: formData.email,
-                from_phone: formData.phone,
-                project_type: formData.projectType,
-                subject: formData.subject,
-                message: formData.message,
-                to_email: 'hello@fasya-dev.com' // Email tujuan
-            }
-
-            // Send email using EmailJS
-            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    service_id: serviceID,
-                    template_id: templateID,
-                    user_id: publicKey,
-                    template_params: templateParams
-                })
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
             })
 
-            if (response.ok) {
+            const result = await res.json()
+
+            if (res.ok) {
                 setSubmitStatus('success')
                 setFormData({
                     name: "",
@@ -91,16 +72,33 @@ Terima kasih! 🙏`
                     message: "",
                     projectType: "website"
                 })
-                
-                // Reset status after 5 seconds
-                setTimeout(() => setSubmitStatus(null), 5000)
+
+                // Reset status after 7 seconds
+                setTimeout(() => setSubmitStatus(null), 7000)
+            } else if (res.status === 429) {
+                // Rate limit exceeded
+                setSubmitStatus('error')
+                setErrorMessage(result.error || "Terlalu banyak percobaan. Mohon tunggu sebentar.")
+                setTimeout(() => {
+                    setSubmitStatus(null)
+                    setErrorMessage("")
+                }, 7000)
             } else {
-                throw new Error('Failed to send email')
+                setSubmitStatus('error')
+                setErrorMessage(result.error || "Gagal mengirim pesan. Silakan coba lagi.")
+                setTimeout(() => {
+                    setSubmitStatus(null)
+                    setErrorMessage("")
+                }, 7000)
             }
         } catch (error) {
             console.error('Error:', error)
             setSubmitStatus('error')
-            setTimeout(() => setSubmitStatus(null), 5000)
+            setErrorMessage("Tidak dapat terhubung ke server. Periksa koneksi Anda.")
+            setTimeout(() => {
+                setSubmitStatus(null)
+                setErrorMessage("")
+            }, 7000)
         } finally {
             setIsSubmitting(false)
         }
@@ -141,34 +139,30 @@ Terima kasih! 🙏`
 
     const socialMedia = [
         {
-            icon: "📘",
-            name: "Facebook",
-            username: "@fasyadev",
-            link: "https://facebook.com",
-            color: "from-blue-600 to-blue-400"
-        },
-        {
-            icon: "📸",
+            icon: FaInstagram,
             name: "Instagram",
-            username: "@fasya.dev",
-            link: "https://instagram.com",
+            username: "@fasyadev31",
+            link: "https://instagram.com/fasyadev31",
             color: "from-pink-600 to-purple-500"
         },
         {
-            icon: "🐦",
+            icon: FaTiktok,
             name: "Twitter",
-            username: "@fasyadev",
-            link: "https://twitter.com",
+            username: "@fasyadev31",
+            link: "https://tiktok.com/@fasyadev31",
             color: "from-sky-500 to-blue-400"
         },
-        {
-            icon: "💼",
-            name: "LinkedIn",
-            username: "Fasya Dev",
-            link: "https://linkedin.com",
-            color: "from-blue-700 to-blue-500"
-        }
     ]
+
+    const getProjectTypeLabel = (type) => {
+        const labels = {
+            'website': 'Starter',
+            'webapp': 'Professional',
+            'mobile': 'Enterprise',
+            'other': 'Paket Custom'
+        }
+        return labels[type] || type
+    }
 
     return (
         <section className="min-h-screen py-32 px-6 md:px-16 lg:px-20 bg-gradient-to-b from-bg via-primary/5 to-bg">
@@ -198,7 +192,7 @@ Terima kasih! 🙏`
                                 className="group relative bg-bg border-2 border-text/10 rounded-2xl p-6 hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-xl text-left"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
-                                
+
                                 <div className="relative z-10 space-y-3">
                                     <div className="text-4xl mb-2">{template.icon}</div>
                                     <h3 className="font-bold text-text text-lg">{template.title}</h3>
@@ -214,31 +208,31 @@ Terima kasih! 🙏`
 
                 {/* Main Contact Form & WhatsApp Preview */}
                 <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
-                    {/* Email Form */}
+                    {/* Contact Form */}
                     <div className="bg-bg border-2 border-text/10 rounded-3xl p-8 md:p-10">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-2xl">
                                 📧
                             </div>
                             <div>
-                                <h2 className="text-2xl font-bold text-text">Kirim Email</h2>
+                                <h2 className="text-2xl font-bold text-text">Kirim Pesan</h2>
                                 <p className="text-sm text-text/60">Isi form dan kirim langsung</p>
                             </div>
                         </div>
 
                         {/* Success/Error Message */}
                         {submitStatus === 'success' && (
-                            <div className="mb-6 p-4 bg-green-500/10 border-2 border-green-500 rounded-xl">
-                                <p className="text-green-600 font-semibold">✅ Email berhasil dikirim! Kami akan segera menghubungi Anda.</p>
+                            <div className="mb-6 p-4 bg-green-500/10 border-2 border-green-500 rounded-xl animate-slide-down">
+                                <p className="text-green-600 font-semibold">✅ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.</p>
                             </div>
                         )}
                         {submitStatus === 'error' && (
-                            <div className="mb-6 p-4 bg-red-500/10 border-2 border-red-500 rounded-xl">
-                                <p className="text-red-600 font-semibold">❌ Gagal mengirim email. Silakan coba lagi atau hubungi via WhatsApp.</p>
+                            <div className="mb-6 p-4 bg-red-500/10 border-2 border-red-500 rounded-xl animate-slide-down">
+                                <p className="text-red-600 font-semibold">❌ {errorMessage}</p>
                             </div>
                         )}
-                        
-                        <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+
+                        <form onSubmit={handleSubmit} className="space-y-5">
                             <div className="grid md:grid-cols-2 gap-5">
                                 <div>
                                     <label className="block text-text font-semibold mb-2 text-sm">
@@ -250,7 +244,8 @@ Terima kasih! 🙏`
                                         value={formData.name}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors"
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                         placeholder="John Doe"
                                     />
                                 </div>
@@ -264,7 +259,8 @@ Terima kasih! 🙏`
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors"
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                         placeholder="john@example.com"
                                     />
                                 </div>
@@ -279,7 +275,8 @@ Terima kasih! 🙏`
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors"
+                                    disabled={isSubmitting}
+                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     placeholder="08123456789"
                                 />
                             </div>
@@ -293,11 +290,12 @@ Terima kasih! 🙏`
                                     value={formData.projectType}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors"
+                                    disabled={isSubmitting}
+                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <option value="website">Starter</option>
                                     <option value="webapp">Professional</option>
-                                    <option value="mobile">Enterpise</option>
+                                    <option value="mobile">Enterprise</option>
                                     <option value="other">Paket Custom</option>
                                 </select>
                             </div>
@@ -312,22 +310,24 @@ Terima kasih! 🙏`
                                     value={formData.subject}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors"
+                                    disabled={isSubmitting}
+                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     placeholder="Konsultasi Pembuatan Website"
                                 />
                             </div>
 
                             <div>
                                 <label className="block text-text font-semibold mb-2 text-sm">
-                                    Pesan *
+                                    Pesan * <span className="text-text/40 font-normal">(min. 10 karakter)</span>
                                 </label>
                                 <textarea
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
+                                    disabled={isSubmitting}
                                     rows={5}
-                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors resize-none"
+                                    className="w-full px-4 py-3 bg-bg border-2 border-text/10 rounded-xl text-text focus:border-primary focus:outline-none transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                                     placeholder="Ceritakan detail project yang Anda inginkan..."
                                 />
                             </div>
@@ -335,9 +335,21 @@ Terima kasih! 🙏`
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                className="w-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
                             >
-                                {isSubmitting ? "Mengirim..." : "📧 Kirim Email"}
+                                {isSubmitting ? (
+                                    <>
+                                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Mengirim...
+                                    </>
+                                ) : (
+                                    <>
+                                        📧 Kirim Pesan
+                                    </>
+                                )}
                             </button>
                         </form>
                     </div>
@@ -363,7 +375,7 @@ Terima kasih! 🙏`
                                 <p>Nama: {formData.name || '[Nama Anda]'}</p>
                                 <p>Email: {formData.email || '[Email Anda]'}</p>
                                 <p>No. HP: {formData.phone || '[No. HP Anda]'}</p>
-                                <p className="font-bold">🎯 Jenis Project: {formData.projectType === 'website' ? 'Website' : formData.projectType === 'webapp' ? 'Web Application' : formData.projectType === 'mobile' ? 'Mobile App' : 'Lainnya'}</p>
+                                <p className="font-bold">🎯 Jenis Project: {getProjectTypeLabel(formData.projectType)}</p>
                                 <p className="font-bold">📝 Subject: {formData.subject || '[Subject Project]'}</p>
                                 <p className="font-bold">💬 Detail Project:</p>
                                 <p>{formData.message || '[Ceritakan detail project Anda]'}</p>
@@ -390,7 +402,7 @@ Terima kasih! 🙏`
                     <h2 className="text-2xl md:text-3xl font-bold text-text text-center mb-8">
                         Ikuti Kami di Social Media
                     </h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-center justify-center ">
                         {socialMedia.map((social, index) => (
                             <a
                                 key={index}
@@ -400,9 +412,11 @@ Terima kasih! 🙏`
                                 className="group relative bg-bg border-2 border-text/10 rounded-2xl p-6 hover:border-primary transition-all duration-300 hover:scale-105 hover:shadow-xl text-center"
                             >
                                 <div className={`absolute inset-0 bg-gradient-to-br ${social.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`} />
-                                
+
                                 <div className="relative z-10 space-y-2">
-                                    <div className="text-4xl mb-2">{social.icon}</div>
+                                    <div className="text-4xl mb-4">
+                                        {social.icon && <social.icon size={40} className="text-2xl text-text mx-auto" />}
+                                    </div>
                                     <h3 className="font-bold text-text">{social.name}</h3>
                                     <p className="text-xs text-text/60">{social.username}</p>
                                 </div>
@@ -414,14 +428,30 @@ Terima kasih! 🙏`
                 {/* Direct Email Link */}
                 <div className="text-center max-w-2xl mx-auto bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl p-8 border-2 border-primary/20">
                     <h3 className="text-xl font-bold text-text mb-3">Atau Email Langsung Ke:</h3>
-                    <a 
-                        href="mailto:hello@fasya-dev.com" 
+                    <a
+                        href="mailto:fasyadev31@gmail.com"
                         className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:scale-105 transition-transform inline-block"
                     >
-                        fasyadev@gmail.com
+                        fasyadev31@gmail.com
                     </a>
                 </div>
             </div>
+
+            <style jsx>{`
+                @keyframes slide-down {
+                    from {
+                        transform: translateY(-10px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+                .animate-slide-down {
+                    animation: slide-down 0.3s ease-out;
+                }
+            `}</style>
         </section>
     )
 }
