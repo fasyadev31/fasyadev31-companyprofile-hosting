@@ -1,5 +1,6 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowRight, Heart } from 'lucide-react';
+"use client";
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowRight, Heart, Loader2, CheckCircle, XCircle } from 'lucide-react';
 
 export default function Footer() {
     const quickLinks = [
@@ -24,8 +25,74 @@ export default function Footer() {
         { icon: Youtube, href: "#", label: "YouTube" },
     ];
 
+    const [email, setEmail] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [notification, setNotification] = useState({ show: false, type: "", message: "" });
+
+    const showNotification = (type, message) => {
+        setNotification({ show: true, type, message });
+        setTimeout(() => {
+            setNotification({ show: false, type: "", message: "" });
+        }, 5000);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        // Validasi email di frontend
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            showNotification("error", "Mohon masukkan email yang valid");
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            const res = await fetch("/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+
+            const result = await res.json();
+
+            if (res.ok) {
+                showNotification("success", "Terima kasih! Email Anda berhasil didaftarkan.");
+                setEmail(""); // Reset form
+            } else if (res.status === 429) {
+                // Rate limit exceeded
+                showNotification("error", result.error || "Terlalu banyak percobaan. Mohon tunggu sebentar.");
+            } else {
+                showNotification("error", result.error || "Terjadi kesalahan. Silakan coba lagi.");
+            }
+        } catch (error) {
+            showNotification("error", "Tidak dapat terhubung ke server. Periksa koneksi Anda.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <footer className="relative bg-gradient-to-br from-footer via-footer-hover to-footer text-white overflow-hidden">
+            {/* Notification Toast */}
+            {notification.show && (
+                <div className="fixed top-4 right-4 z-50 animate-slide-in-right">
+                    <div className={`flex items-center gap-3 px-6 py-4 rounded-xl shadow-2xl backdrop-blur-md ${
+                        notification.type === "success" 
+                            ? "bg-green-500/90 border border-green-400/30" 
+                            : "bg-red-500/90 border border-red-400/30"
+                    }`}>
+                        {notification.type === "success" ? (
+                            <CheckCircle size={24} className="flex-shrink-0" />
+                        ) : (
+                            <XCircle size={24} className="flex-shrink-0" />
+                        )}
+                        <p className="font-medium">{notification.message}</p>
+                    </div>
+                </div>
+            )}
+
             {/* Decorative Elements */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
@@ -44,17 +111,33 @@ export default function Footer() {
                                 Subscribe newsletter kami untuk mendapatkan tips, artikel, dan promo terbaru
                             </p>
                         </div>
-                        <div className="flex gap-3">
+                        <form className="flex flex-col sm:flex-row gap-3" onSubmit={handleSubmit}>
                             <input
                                 type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Masukkan email Anda"
-                                className="flex-1 px-6 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                                disabled={isLoading}
+                                className="flex-1 px-6 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-accent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             />
-                            <button className="px-6 py-4 bg-accent hover:bg-accent/90 rounded-xl font-semibold flex items-center gap-2 transition-all hover:scale-105 shadow-lg">
-                                Subscribe
-                                <ArrowRight size={18} />
+                            <button 
+                                type="submit"
+                                disabled={isLoading}
+                                className="px-6 py-4 bg-accent hover:bg-accent/90 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                            >
+                                {isLoading ? (
+                                    <>
+                                        <Loader2 size={18} className="animate-spin" />
+                                        Mengirim...
+                                    </>
+                                ) : (
+                                    <>
+                                        Subscribe
+                                        <ArrowRight size={18} />
+                                    </>
+                                )}
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -114,16 +197,9 @@ export default function Footer() {
                         </ul>
                     </div>
 
-
                     {/* Contact Info */}
                     <div className="space-y-3">
                         <h3 className="text-lg font-bold mb-6">Kontak Kami</h3>
-                        {/* <div className="flex items-start gap-3">
-                            <MapPin size={18} className="text-accent mt-1 flex-shrink-0" />
-                            <span className="text-white/80 text-sm">
-                                Jl. Teknologi No. 123, Jakarta Selatan, 12345
-                            </span>
-                        </div> */}
                         <div className="flex items-center gap-3">
                             <Phone size={18} className="text-accent flex-shrink-0" />
                             <span className="text-white/80 text-sm">+62895357517499</span>
@@ -133,7 +209,6 @@ export default function Footer() {
                             <span className="text-white/80 text-sm">fasyadev31@gmail.com</span>
                         </div>
                     </div>
-
 
                 </div>
             </div>
@@ -147,20 +222,25 @@ export default function Footer() {
                             <Heart size={14} className="text-accent fill-accent animate-pulse" />
                             <span>in Indonesia</span>
                         </div>
-                        {/* <div className="flex gap-6">
-                            <a href="#" className="hover:text-accent transition-colors">
-                                Privacy Policy
-                            </a>
-                            <a href="#" className="hover:text-accent transition-colors">
-                                Terms of Service
-                            </a>
-                            <a href="#" className="hover:text-accent transition-colors">
-                                Cookie Policy
-                            </a>
-                        </div> */}
                     </div>
                 </div>
             </div>
+
+            <style jsx>{`
+                @keyframes slide-in-right {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                .animate-slide-in-right {
+                    animation: slide-in-right 0.3s ease-out;
+                }
+            `}</style>
         </footer>
     );
 }
