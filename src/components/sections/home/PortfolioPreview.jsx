@@ -1,40 +1,11 @@
 "use client"
 import { useState } from "react"
 import Image from "next/image"
-import { Sparkles, Zap, Crown, ArrowRight, Check, ExternalLink } from "lucide-react"
+import { ArrowRight, ExternalLink } from "lucide-react"
+import { projects } from "@/data/projects"
 
 export default function PortfolioPreview() {
     const [hoveredCard, setHoveredCard] = useState(null)
-
-    const projects = [
-        {
-            title: "E-Commerce Platform",
-            category: "Web Application",
-            image: "/images/projects/ecommerce-preview.jpg", // Ganti dengan screenshot website atau OpenGraph image
-            url: "https://example-ecommerce.com",
-            description: "Platform e-commerce modern dengan fitur lengkap",
-            tags: ["Next.js", "Stripe", "Tailwind"],
-            gradient: "from-purple-500 to-pink-500"
-        },
-        {
-            title: "Company Profile PT Nur Hakim Jaya Indonesia",
-            category: "Corporate Website",
-            image: "/images/nhjwebsite.png", // Ganti dengan screenshot website
-            url: "https://nurhakimjayaindonesia.com",
-            description: "Website company profile dengan tujuan untuk mengenalkan perusahaan kepada khalayak ramai",
-            tags: ["NextJS", "Tailwind", "Maps"],
-            gradient: "from-blue-500 to-cyan-500"
-        },
-        {
-            title: "Food Delivery App",
-            category: "Mobile Web App",
-            image: "/images/projects/food-delivery-preview.jpg", // Ganti dengan screenshot website
-            url: "https://example-fooddelivery.com",
-            description: "Aplikasi delivery dengan real-time tracking",
-            tags: ["React Native", "Firebase", "Maps"],
-            gradient: "from-orange-500 to-red-500"
-        }
-    ]
 
     return (
         <section className="py-20 md:py-32 px-6 md:px-16 lg:px-20 bg-bg">
@@ -91,7 +62,7 @@ export default function PortfolioPreview() {
 
                                 {/* Category Badge */}
                                 <div className="absolute top-4 left-4">
-                                    <span className="px-3 py-1 bg-white/95 backdrop-blur-sm text-text rounded-lg text-xs font-bold">
+                                    <span className="px-3 py-1 bg-magenta/95 backdrop-blur-sm text-text rounded-lg text-xs font-bold">
                                         {project.category}
                                     </span>
                                 </div>
