@@ -10,8 +10,8 @@ export const founders = [
         story: `Perjalanan saya di dunia teknologi dimulai dari rasa penasaran yang besar. Sejak kecil, saya selalu tertarik dengan bagaimana teknologi bisa mengubah cara kita hidup dan bekerja.`,
         socials: [
             { name: "instagram", icon: FaInstagram, url: "https://instagram.com/farihsyamsudin", color: "hover:bg-pink-600" },
-            { name: "gitlab", icon: FaGitlab, url: "https://tiktok.com/@farihsyamsudin", color: "hover:bg-black" },
-            { name: "linkedin", icon: FaLinkedin, url: "https://facebook.com/farihsyamsudin", color: "hover:bg-blue-600" },
+            { name: "gitlab", icon: FaGitlab, url: "https://gitlab.com/farihsyamsudin", color: "hover:bg-black" },
+            { name: "linkedin", icon: FaLinkedin, url: "https://www.linkedin.com/in/farih-syamsudin/", color: "hover:bg-blue-600" },
         ],
         experiences: [
             {
