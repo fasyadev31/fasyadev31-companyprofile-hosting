@@ -1,11 +1,11 @@
 export const projects = [
     {
-        title: "E-Commerce Platform",
-        category: "Web Application",
-        image: "/images/projects/ecommerce-preview.jpg", // Ganti dengan screenshot website atau OpenGraph image
-        url: "https://example-ecommerce.com",
-        description: "Platform e-commerce modern dengan fitur lengkap",
-        tags: ["Next.js", "Stripe", "Tailwind"],
+        title: "Portfolio Website Agus Photography",
+        category: "Portfolio Website",
+        image: "/images/aguswebsite.png", // Ganti dengan screenshot website atau OpenGraph image
+        url: "https://fxsym.github.io/agusphotography/",
+        description: "Website untuk vendor fotografi dengan tujuan untuk memperlihatkan hasil hasil foto jepretan pemilik vendor",
+        tags: ["ReactJS", "Tailwind"],
         gradient: "from-purple-500 to-pink-500"
     },
     {
