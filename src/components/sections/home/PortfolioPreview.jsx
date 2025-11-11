@@ -79,18 +79,6 @@ export default function PortfolioPreview() {
                                     </p>
                                 </div>
 
-                                {/* Tags */}
-                                <div className="flex flex-wrap gap-2">
-                                    {project.tags.map((tag, i) => (
-                                        <span
-                                            key={i}
-                                            className="px-3 py-1 bg-primary/10 text-primary rounded-lg text-xs font-medium"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
                                 {/* Direct Link */}
                                 <a
                                     href={project.url}
