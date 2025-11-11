@@ -76,42 +76,36 @@ export const founders = [
             {
                 type: "milestone",
                 title: "Terjun ke Dunia Teknologi",
-                period: "2020",
-                description: "Mulai belajar programming dari YouTube dan dokumentasi online. Fokus pada full-stack development dari awal.",
+                period: "2022",
+                description: "Mulai belajar programming dengan mengikuti course kelas online dan dokumentasi online. Fokus pada full-stack development sedari awal.",
                 badge: "Awal Mula"
             },
             {
                 type: "project",
-                title: "Portfolio Website Builder",
-                period: "2021",
-                description: "Membuat tool untuk membantu teman-teman membuat portfolio website dengan mudah. Project ini mendapat apresiasi dari komunitas developer lokal.",
-                achievements: ["React", "Node.js", "MongoDB"]
-            },
-            {
-                type: "work",
-                title: "Full Stack Developer",
-                period: "2022 - 2023",
-                description: "Bergabung dengan agency digital, menghandle berbagai project dari e-commerce hingga company profile. Mendalami backend development.",
-                achievements: ["Full Stack", "Database Design", "API Development", "Cloud Deployment"]
+                title: "Joki Project Kampus",
+                period: "2023-2024",
+                description: "Mendapatkan beberapa project pembuatan fullstcak webiste development dalam lingkup kampus dan mulai belajar terkait dengan request dari client",
+                achievements: ["Laravel", "React", "Node.js", "Cloud"]
             },
             {
                 type: "project",
-                title: "E-Commerce Platform",
-                period: "2023",
-                description: "Membangun platform e-commerce lengkap dengan payment gateway, inventory management, dan admin dashboard untuk klien enterprise.",
+                title: "Portfolio Website",
+                period: "2024",
+                description: "Mulai mendapatkan tawaran dari vendor dan juga perusahaan untuk membuat website portfolio atau company profile",
                 badge: "Major Project",
-                achievements: ["Next.js", "PostgreSQL", "Stripe", "AWS"]
+                achievements: ["Next.js", "SEO", "Optimized Website"]
             },
             {
-                type: "award",
-                title: "Rising Star Developer",
-                period: "2023",
-                description: "Diakui sebagai salah satu developer muda berbakat oleh komunitas tech Indonesia.",
-                badge: "Recognition"
+                type: "work",
+                title: "IT Support",
+                period: "2025 - now",
+                description: "Bergabung dengan PT Nur Hakim Jaya Indonesia sebagai seorang IT Support yang membantu jalanya kebutuhan IT dalam PT.",
+                achievements: ["Full Stack"]
             },
+
             {
                 type: "milestone",
-                title: "Co-Founder FASYA DEV",
+                title: "Mendirikan FASYA DEV",
                 period: "2024",
                 description: "Bersama Farih, membangun FASYA DEV dengan visi menghadirkan solusi digital terbaik untuk bisnis di Indonesia.",
                 badge: "Current",
