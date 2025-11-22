@@ -199,7 +199,7 @@ export default function Footer() {
                         <h3 className="text-lg font-bold mb-6">Kontak Kami</h3>
                         <div className="flex items-center gap-3">
                             <Phone size={18} className="text-accent flex-shrink-0" />
-                            <span className="text-white/80 text-sm">+62895357517499</span>
+                            <span className="text-white/80 text-sm">+6285188160217</span>
                         </div>
                         <div className="flex items-center gap-3">
                             <Mail size={18} className="text-accent flex-shrink-0" />

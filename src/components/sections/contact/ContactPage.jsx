@@ -16,7 +16,7 @@ export default function ContactPage() {
     const [errorMessage, setErrorMessage] = useState("")
 
     // Ganti dengan nomor WhatsApp kalian (format: 628xxxxxxxxxx)
-    const whatsappNumber = "6281234567890"
+    const whatsappNumber = "6285188160217"
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })

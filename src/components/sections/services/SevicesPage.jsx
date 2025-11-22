@@ -235,20 +235,20 @@ export default function ServicesPage() {
                                             <span className="text-text/60">Waktu Pengerjaan:</span>
                                             <span className="font-semibold text-text">{pkg.deliveryTime}</span>
                                         </div> */}
-                                        <div className="flex items-center justify-between text-sm">
+                                        {/* <div className="flex items-center justify-between text-sm">
                                             <span className="text-text/60">Revisi:</span>
                                             <span className="font-semibold text-text">{pkg.revision}</span>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     {/* CTA Button */}
-                                    <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${pkg.popular
+                                    {/* <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${pkg.popular
                                         ? `bg-gradient-to-r ${pkg.color} text-white shadow-lg hover:shadow-xl hover:scale-105`
                                         : 'bg-bg border-2 border-primary text-primary hover:bg-primary hover:text-white'
                                         }`}>
                                         Pilih Paket Ini
                                         <ArrowRight size={18} />
-                                    </button>
+                                    </button> */}
 
                                     {/* Glow Effect */}
                                     <div className={`absolute -inset-1 bg-gradient-to-br ${pkg.color} rounded-3xl blur-2xl transition-opacity duration-500 -z-10 ${hoveredPackage === pkg.id ? 'opacity-20' : 'opacity-0'
