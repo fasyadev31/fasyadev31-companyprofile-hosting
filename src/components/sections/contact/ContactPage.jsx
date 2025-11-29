@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
-import { FaInstagram, FaTiktok } from "react-icons/fa"
+import { socialMedia } from "@/data/socialMedia"
+import { quickTemplates } from "@/data/quickTemplates"
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -26,21 +27,21 @@ export default function ContactPage() {
     const handleWhatsApp = () => {
         const message = `Halo Fasya Dev! 👋
 
-Saya tertarik untuk berdiskusi tentang project:
+        Saya tertarik untuk berdiskusi tentang project:
 
-📋 *Detail Project:*
-Nama: ${formData.name || '[Nama Anda]'}
-Email: ${formData.email || '[Email Anda]'}
-No. HP: ${formData.phone || '[No. HP Anda]'}
+        📋 *Detail Project:*
+        Nama: ${formData.name || '[Nama Anda]'}
+        Email: ${formData.email || '[Email Anda]'}
+        No. HP: ${formData.phone || '[No. HP Anda]'}
 
-🎯 *Jenis Project:* ${formData.projectType === 'website' ? 'Starter' : formData.projectType === 'webapp' ? 'Professional' : formData.projectType === 'mobile' ? 'Enterprise' : 'Paket Custom'}
+        🎯 *Jenis Project:* ${formData.projectType === 'website' ? 'Starter' : formData.projectType === 'webapp' ? 'Professional' : formData.projectType === 'mobile' ? 'Enterprise' : 'Paket Custom'}
 
-📝 *Subject:* ${formData.subject || '[Subject Project]'}
+        📝 *Subject:* ${formData.subject || '[Subject Project]'}
 
-💬 *Detail Project:*
-${formData.message || '[Ceritakan detail project Anda]'}
+        💬 *Detail Project:*
+        ${formData.message || '[Ceritakan detail project Anda]'}
 
-Terima kasih! 🙏`
+        Terima kasih! 🙏`
 
         const encodedMessage = encodeURIComponent(message)
         window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank')
@@ -104,55 +105,10 @@ Terima kasih! 🙏`
         }
     }
 
-    // Quick templates untuk WhatsApp
-    const quickTemplates = [
-        {
-            icon: "🌐",
-            title: "Konsultasi Website",
-            desc: "Ingin membuat website baru",
-            message: "Halo! Saya ingin konsultasi untuk pembuatan website. Bisa dibantu?"
-        },
-        {
-            icon: "⚡",
-            title: "Web Application",
-            desc: "Butuh web app custom",
-            message: "Hi! Saya butuh web application custom. Bisa diskusi lebih lanjut?"
-        },
-        {
-            icon: "🔧",
-            title: "Maintenance",
-            desc: "Butuh maintenance website",
-            message: "Halo! Website saya butuh maintenance dan update. Bisa bantu?"
-        },
-        {
-            icon: "💬",
-            title: "Tanya-tanya",
-            desc: "Mau tanya dulu",
-            message: "Hi Fasya Dev! Saya mau tanya-tanya dulu seputar jasa kalian."
-        }
-    ]
-
     const handleQuickTemplate = (message) => {
         const encodedMessage = encodeURIComponent(message)
         window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank')
     }
-
-    const socialMedia = [
-        {
-            icon: FaInstagram,
-            name: "Instagram",
-            username: "@fasyadev31",
-            link: "https://instagram.com/fasyadev31",
-            color: "from-pink-600 to-purple-500"
-        },
-        {
-            icon: FaTiktok,
-            name: "Twitter",
-            username: "@fasyadev31",
-            link: "https://tiktok.com/@fasyadev31",
-            color: "from-sky-500 to-blue-400"
-        },
-    ]
 
     const getProjectTypeLabel = (type) => {
         const labels = {
@@ -402,7 +358,7 @@ Terima kasih! 🙏`
                     <h2 className="text-2xl md:text-3xl font-bold text-text text-center mb-8">
                         Ikuti Kami di Social Media
                     </h2>
-                    <div className="grid grid-cols-2 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-center justify-center ">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-center justify-center ">
                         {socialMedia.map((social, index) => (
                             <a
                                 key={index}
