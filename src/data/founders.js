@@ -63,7 +63,7 @@ export const founders = [
     {
         name: "Fatih Syamsudin",
         role: "Co-Founder & Full Stack Developer",
-        image: "/images/fatihsyamsudin.png",
+        image: "/images/fatihsyamsudin-2.png",
         gradient: "from-purple-500 to-pink-500",
         description: "Website developer muda dengan berbagai penguasaan teknologi dan sangat suka mengoding",
         story: `Perjalanan saya di dunia teknologi dimulai dari rasa penasaran yang besar. Sejak kecil, saya selalu tertarik dengan bagaimana teknologi bisa mengubah cara kita hidup dan bekerja.`,
