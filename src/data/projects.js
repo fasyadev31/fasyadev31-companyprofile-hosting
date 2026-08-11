@@ -25,5 +25,23 @@ export const projects = [
         description: "Aplikasi profile program studi logistik kelautan",
         tags: ["Wordpress", "Elementor", "CSS"],
         gradient: "from-orange-500 to-red-500"
+    },
+    {
+        title: "Company Profile Enviro Buntari",
+        category: "Education Website",
+        image: "/images/buntari.png", // Ganti dengan screenshot website
+        url: "https://buntari.id/",
+        description: "Aplikasi profile perusahaan Enviro Buntari",
+        tags: ["Payload CMS", "NextJS"],
+        gradient: "from-yellow-500 to-orange-500"
+    },
+    {
+        title: "Company Profile Gia's Kitchen",
+        category: "UMKM Website",
+        image: "/images/gias-kitchen.png", // Ganti dengan screenshot website
+        url: "https://gias-kitchen-beta.vercel.app/",
+        description: "Aplikasi profile UMKM Gia's Kitchen",
+        tags: ["ReactJS", "CSS", "SpreadSheets DB"],
+        gradient: "from-green-500 to-emerald-500"
     }
 ]
